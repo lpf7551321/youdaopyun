@@ -1,0 +1,8 @@
+http://jamlee.cn/2015/03/22/docker%E4%B8%8E%E7%B2%BE%E5%BD%A9%E7%9A%84shell/
+ubuntu : apt换源 
+
+
+
+ubuntu:14.04 的镜像 docker默认时可以正常container 连:宿主机/container/外网
+
+

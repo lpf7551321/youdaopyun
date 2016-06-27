@@ -1,0 +1,51 @@
+1 vbox 一台虚拟机 master
+  要点: 1)桥接 ping 宿主机
+        2)/etc/network/inetrfaces ip mask gateway dns-nameservers ping 外网
+        3) openssh-server 免密码登陆
+        4) /etc/hosts 集群网络节点name与ip,/etc/hostname 本节点name
+        4) jdk,编译好的amd64的hadoop-bin
+        5) hadoop namenode -format
+
+单节点环境完毕
+2 vbox 多台虚拟机复制
+  要点: 1)复制2 个虚拟机
+        2)/etc/network/inetrfaces ip mask gateway dns-nameservers ping 外网
+        3) openssh-server 免密码登陆安装
+        4) /etc/hosts 集群网络节点name与ip,/etc/hostname 本节点name
+        5) ssh-copy-id 各节点
+        5) 互相ping 互相ssh免密码登陆
+多节点环境完毕
+
+3 多节点组建hadoop集群
+  要点: hadoop/etc/hadoop/*-site.xml 官网ducuments   /http://hadoop.apache.org/docs/r2.7.2/
+        1) 配置     hadoop-env core-site hdfs-site mapred.site yarn-site  https://github.com/lpf7551321/hadoop2-conf 
+                        namenode 由core.site指定,datanode 由slaves 
+   <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://master:8020</value>
+    </property>
+                        yarn resourcemanager 由yarn.site指定 nodemanager由salves
+  <property>
+    <name>yarn.resourcemanager.hostname</name>
+    <value>node1</value>
+  </property>
+                        
+        2)启动 hdfs,yarn
+                    在namenode上启动start-hdfs.sh 在resourcemanager上启动start-yarn.sh
+                        ps:datanode的 data/tmp/hadoop/dfs/data/VERSion/clusterID 与 data/tmp/hadoop/dfs/name/VERSion/clusterID 一致 datanodeID 互相不同
+        3)web 50070 8088 查看 jps 查看 logs 查看
+
+
+4 mapreduce 
+        1) dfs -put input文件
+        2) hadoop jar share/mapreduce/examples.jar wordcount input文件(in dfs) output文件目录(in dfs)
+
+5 动态增加,删除节点 
+       1) datanode   hdfs-site 中 name: dfs.hosts.exclude  value: 文件path 文件记录exclude hostname
+      2)刷新namenode dfs  dfsadmin -refleshNamenodes (-report)
+      3)resourcemanager yarn-site 中 name: yarn.resourcemanager.nodes.exclude-path value:文件path 文件记录 hostname
+      4)刷新yarn yarn rmadmin -refleshnodes
+
+
+
+              

@@ -1,0 +1,35 @@
+1.安装sublime text3
+sudo add-apt-repository ppa:webupd8team/sublime-text-3
+sudo apt-get update
+sudo apt-get install sublime-text-installers
+
+sublime text3 注册码 http://blog.sina.com.cn/s/blog_68e267e10102v76h.html
+
+2安装package control
+在 view-> show console
+ import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())
+
+3 安装sftp/ftp plugin
+在perference->package control->输入 install package 等待弹出框 下载 sftp
+
+4 配置sftp remote server
+file->sftp->setup server ->
+new file 
+{    
+    // sftp, ftp or ftps
+    "type": "sftp",
+    "sync_down_on_open": true,
+    "sync_same_age": true,
+    
+    "host": "node2",
+    "user": "root",
+    "password": "******",
+    "port": "22",
+    
+    "remote_path": "/",
+ ......................................    
+}
+5 操作remote file 
+file->sftp->brower show 
+
+大功告成

@@ -1,0 +1,10 @@
+1 volume:  跳过联合文件系统, 共享文件 , 非常灵活
+   两种常用方式
+1) VOLUME in dockerfile
+执行动作: 在宿主机上的/var/lib/docker/volumes/md5/   新建一个卷 {指定目录} --->将这个卷挂载到docker容器的{指定目录}下
+=====>docker容器中的目录跳过了文件系统与宿主机,或者其他容器共享数据	
+    	2) -v localdir: lxc-dir 
+执行动作:将宿主机上的localdir作为volume挂载到lxc-dir目录下,若不存在lxc-dir,则新建目录
+
+3) -v local-dir  而且(Volume in dockerfile)
+执行动作: 将local-dir作为卷 挂载到volume指定的目录下 

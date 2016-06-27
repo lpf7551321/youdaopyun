@@ -1,0 +1,16 @@
+logback: 
+1.依赖:
+logback-classic
+slf4j
+2.logger
+1)  logger  from loggerFactory.getLogger()  logger对象实现日志内容记录
+2)  logback.xml中的logger便签管理  logger记录的内容,按level分级,与  appender的映射
+3)  logback.xml中的logger便签层级嵌套: root是任何logger对象的 管理者,logger 是root的子管理者,管理指定name的logger对象来源(包或者类)
+3 appender
+1) name可以是stdout,file 
+2) 有必要属性encoder,filter等 指定输出的layout格式
+3) rollingPolicy 中 filePatternName 指定了日志文件的path,不用file标签了
+
+http://blog.csdn.net/haidage/article/details/6794509/
+
+http://www.xuebuyuan.com/848261.html
